@@ -57,3 +57,27 @@ This system allows users to manage inventory, including adding, viewing, updatin
 
 ---
 
+## Project Structure
+```
+/mobile-store
+│── backend  # Flask API
+│   ├── app.py
+│   ├── store.db  # SQLite Database
+│── frontend  # React App
+│   ├── src
+│   │   ├── components
+│   │   │   ├── ProductForm.jsx
+│   │   │   ├── ProductList.jsx
+│   │   │   ├── IntroPage.jsx
+│   │   ├── styles
+│   │   │   ├── ProductForm.css
+│   │   │   ├── ProductList.css
+│   │   │   ├── IntroPage.css
+│   ├── App.jsx
+│   ├── index.js
+│── package.json
+│── README.md
+```
+
+---
+
