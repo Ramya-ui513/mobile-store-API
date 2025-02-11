@@ -27,3 +27,33 @@ This system allows users to manage inventory, including adding, viewing, updatin
 - **User-friendly UI with separate styling** for each component.
 
 ---
+
+## Installation & Setup
+### 1️⃣ Backend Setup (Flask)
+1. **Install dependencies:**
+   ```sh
+   pip install flask flask-cors sqlite3
+   ```
+2. **Run the Flask server:**
+   ```sh
+   python app.py
+   ```
+3. **Backend will run on:** `http://127.0.0.1:5000/`
+
+### 2️⃣ Frontend Setup (React.js)
+1. **Navigate to frontend directory:**
+   ```sh
+   cd frontend
+   ```
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+3. **Start the React app:**
+   ```sh
+   npm start
+   ```
+4. **Frontend will run on:** `http://localhost:3000/`
+
+---
+
