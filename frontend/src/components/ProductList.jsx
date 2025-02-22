@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "../styles/ProductList.css";
 
-const ProductList = ({ products, refreshProducts }) => {
+const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
   const handleDelete = async (id) => {
     await axios.delete(`http://127.0.0.1:5000/products/${id}`);
     refreshProducts();
@@ -14,7 +14,10 @@ const ProductList = ({ products, refreshProducts }) => {
       {products.map((product) => (
         <div key={product.id} className="product-item">
           <span>{product.name} - {product.brand} - ${product.price}</span>
-          <button className="delete-button" onClick={() => handleDelete(product.id)}>Delete</button>
+          <div>
+            <button className="update-button" onClick={() => setEditingProduct(product)}>Edit</button>
+            <button className="delete-button" onClick={() => handleDelete(product.id)}>Delete</button>
+          </div>
         </div>
       ))}
     </div>
