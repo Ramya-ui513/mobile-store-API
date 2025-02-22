@@ -8,6 +8,7 @@ import "./styles.css";
 const App = () => {
   const [products, setProducts] = useState([]);
   const [showIntro, setShowIntro] = useState(true);
+  const [editingProduct, setEditingProduct] = useState(null);
 
   const fetchProducts = async () => {
     const response = await axios.get("http://127.0.0.1:5000/products");
@@ -28,8 +29,8 @@ const App = () => {
       ) : (
         <>
           <h1 className="app-title">Mobile Store Manager</h1>
-          <ProductForm refreshProducts={fetchProducts} />
-          <ProductList products={products} refreshProducts={fetchProducts} />
+          <ProductForm refreshProducts={fetchProducts} editingProduct={editingProduct} setEditingProduct={setEditingProduct} />
+          <ProductList products={products} refreshProducts={fetchProducts} setEditingProduct={setEditingProduct} />
         </>
       )}
     </div>
