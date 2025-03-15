@@ -1,6 +1,6 @@
 import React from "react";
 
-const IntroPage = () => {
+const IntroPage = ({ onGetStarted }) => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600">
       <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-lg text-center animate-fadeIn">
@@ -11,22 +11,22 @@ const IntroPage = () => {
           Easily manage your inventory with our user-friendly system:
         </p>
         <ul className="text-gray-700 space-y-2 text-lg">
-          <li className="flex items-center justify-center gap-2">
-            🛒 <span>View available products</span>
-          </li>
-          <li className="flex items-center justify-center gap-2">
-            ➕ <span>Add new products</span>
-          </li>
-          <li className="flex items-center justify-center gap-2">
-            ✏️ <span>Edit existing products</span>
-          </li>
-          <li className="flex items-center justify-center gap-2">
-            🗑️ <span>Delete products</span>
-          </li>
+          <li className="flex items-center justify-center gap-2">🛒 <span>View available products</span></li>
+          <li className="flex items-center justify-center gap-2">➕ <span>Add new products</span></li>
+          <li className="flex items-center justify-center gap-2">✏️ <span>Edit existing products</span></li>
+          <li className="flex items-center justify-center gap-2">🗑️ <span>Delete products</span></li>
+          <li className="flex items-center justify-center gap-2">🔐 <span>Admin Login & Secure Access</span></li>
+          <li className="flex items-center justify-center gap-2">🔎 <span>Search & Filter Products</span></li>
         </ul>
         <p className="text-gray-500 mt-6">
           Start organizing your inventory <span className="font-semibold text-purple-600">seamlessly</span> today! 🚀
         </p>
+        <button 
+          className="mt-6 px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+          onClick={onGetStarted}
+        >
+          Get Started
+        </button>
       </div>
     </div>
   );
