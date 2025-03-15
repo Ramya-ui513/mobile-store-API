@@ -19,18 +19,23 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editingProduct) {
-      await axios.put(`http://127.0.0.1:5000/products/${editingProduct.id}`, formData);
-      setEditingProduct(null);
-    } else {
-      await axios.post("http://127.0.0.1:5000/products", formData);
+    try {
+      if (editingProduct) {
+        await axios.put(`http://127.0.0.1:5000/products/${editingProduct.id}`, formData);
+        setEditingProduct(null);
+      } else {
+        await axios.post("http://127.0.0.1:5000/products", formData);
+      }
+      setFormData({ name: "", brand: "", price: "", stock: "", category: "", description: "" });
+      refreshProducts();
+    } catch (error) {
+      console.error("Error submitting form", error);
     }
-    setFormData({ name: "", brand: "", price: "", stock: "", category: "", description: "" });
-    refreshProducts();
   };
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
+      <h2 className="form-title">{editingProduct ? "Update Product" : "Add Product"}</h2>
       <input className="input" name="name" value={formData.name} placeholder="Product Name" onChange={handleChange} required />
       <input className="input" name="brand" value={formData.brand} placeholder="Brand" onChange={handleChange} required />
       <input className="input" name="price" type="number" value={formData.price} placeholder="Price" onChange={handleChange} required />
