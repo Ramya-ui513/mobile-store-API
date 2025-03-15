@@ -98,7 +98,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 - Future improvements may include:
   - User authentication for secure access is done on 15/03/2024
   - Product search and filtering options is about to implement 
-  - Enhanced UI/UX improvements
+  - Enhanced UI/UX improvements this takes time for a while for me 
 
 ---
 
