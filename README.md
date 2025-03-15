@@ -73,6 +73,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 │   │   │   ├── ProductForm.css
 │   │   │   ├── ProductList.css
 │   │   │   ├── IntroPage.css
+|   |   |   |-- login.css
 │   ├── App.jsx
 │   ├── index.js
 │── package.json
