@@ -14,23 +14,25 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
 
   return (
     <div className="list-container">
-      <h2 className="list-title">Products List</h2>
+      <h2 className="list-title">📦 Product Inventory</h2>
       {products.length > 0 ? (
-        products.map((product) => (
-          <div key={product.id} className="product-item">
-            <div className="product-details">
-              <h3>{product.name} ({product.brand})</h3>
-              <p><strong>Category:</strong> {product.category}</p>
-              <p><strong>Price:</strong> ${product.price}</p>
-              <p><strong>Stock:</strong> {product.stock} units</p>
-              <p><strong>Description:</strong> {product.description}</p>
+        <div className="product-list fade-in">
+          {products.map((product) => (
+            <div key={product.id} className="product-item zoom-in">
+              <div className="product-details">
+                <h3 className="product-name">{product.name} <span className="brand">({product.brand})</span></h3>
+                <p><strong>Category:</strong> {product.category}</p>
+                <p><strong>Price:</strong> ${product.price}</p>
+                <p><strong>Stock:</strong> {product.stock} units</p>
+                <p><strong>Description:</strong> {product.description}</p>
+              </div>
+              <div className="product-actions">
+                <button className="update-button" onClick={() => setEditingProduct(product)}>✏️ Edit</button>
+                <button className="delete-button" onClick={() => handleDelete(product.id)}>🗑️ Delete</button>
+              </div>
             </div>
-            <div className="product-actions">
-              <button className="update-button" onClick={() => setEditingProduct(product)}>Edit</button>
-              <button className="delete-button" onClick={() => handleDelete(product.id)}>Delete</button>
-            </div>
-          </div>
-        ))
+          ))}
+        </div>
       ) : (
         <p className="no-products">No products available</p>
       )}
