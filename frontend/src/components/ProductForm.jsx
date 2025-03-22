@@ -4,8 +4,15 @@ import "../styles/ProductForm.css";
 
 const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => {
   const [formData, setFormData] = useState({
-    name: "", brand: "", price: "", stock: "", category: "", description: ""
+    name: "",
+    brand: "",
+    price: "",
+    stock: "",
+    category: "",
+    description: "",
   });
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   useEffect(() => {
     if (editingProduct) {
@@ -14,7 +21,8 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
   }, [editingProduct]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -33,17 +41,86 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
     }
   };
 
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    window.location.reload();
+  };
+
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <h2 className="form-title">{editingProduct ? "Update Product" : "Add Product"}</h2>
-      <input className="input" name="name" value={formData.name} placeholder="Product Name" onChange={handleChange} required />
-      <input className="input" name="brand" value={formData.brand} placeholder="Brand" onChange={handleChange} required />
-      <input className="input" name="price" type="number" value={formData.price} placeholder="Price" onChange={handleChange} required />
-      <input className="input" name="stock" type="number" value={formData.stock} placeholder="Stock" onChange={handleChange} required />
-      <input className="input" name="category" value={formData.category} placeholder="Category" onChange={handleChange} required />
-      <input className="input" name="description" value={formData.description} placeholder="Description" onChange={handleChange} required />
-      <button className="button">{editingProduct ? "Update Product" : "Add Product"}</button>
-    </form>
+    <div className="product-form-wrapper">
+      <div className="profile-menu">
+        <div className="profile-label" onClick={toggleDropdown}>
+          👤 Admin ▾
+        </div>
+        {dropdownVisible && (
+          <div className="dropdown-menu">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        )}
+      </div>
+
+      <form className="form-container" onSubmit={handleSubmit}>
+        <h2 className="form-title">{editingProduct ? "Update Product" : "Add New Product"}</h2>
+        <div className="form-grid">
+          <input
+            className="input"
+            name="name"
+            value={formData.name}
+            placeholder="Product Name"
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="input"
+            name="brand"
+            value={formData.brand}
+            placeholder="Brand"
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="input"
+            name="price"
+            type="number"
+            value={formData.price}
+            placeholder="Price"
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="input"
+            name="stock"
+            type="number"
+            value={formData.stock}
+            placeholder="Stock"
+            onChange={handleChange}
+            required
+          />
+          <input
+            className="input"
+            name="category"
+            value={formData.category}
+            placeholder="Category"
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            className="input textarea"
+            name="description"
+            value={formData.description}
+            placeholder="Product Description"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button className="button" type="submit">
+          {editingProduct ? "Update Product" : "Add Product"}
+        </button>
+      </form>
+    </div>
   );
 };
 
