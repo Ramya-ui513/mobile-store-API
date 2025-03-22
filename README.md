@@ -97,7 +97,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 - **This README will be updated if any changes are made** to the backend API or frontend UI.
 - Future improvements may include:
   - User authentication for secure access is done on 15/03/2024
-  - Product search and filtering options is about to implement 
+  - Product search and filtering options is implemented on 22/03/2024 
   - Enhanced UI/UX improvements this takes time for a while for me 
 
 ---
