@@ -3,4 +3,3 @@ uvicorn
 pydantic
 flask
 flask_cors
-
