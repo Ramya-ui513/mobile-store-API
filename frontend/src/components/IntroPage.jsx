@@ -40,3 +40,4 @@ const IntroPage = ({ onGetStarted }) => {
 };
 
 export default IntroPage;
+
