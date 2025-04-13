@@ -29,7 +29,7 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
     e.preventDefault();
     try {
       if (editingProduct) {
-        await axios.put(`http://127.0.0.1:9533/products/${editingProduct.id}`, formData);
+        await axios.put(`http://13.48.58.100/:9533/products/${editingProduct.id}`, formData);
         setEditingProduct(null);
       } else {
         await axios.post("http://127.0.0.1:9533/products", formData);
