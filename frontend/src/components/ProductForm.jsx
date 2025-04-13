@@ -32,7 +32,7 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
         await axios.put(`http://13.48.58.100/:9533/products/${editingProduct.id}`, formData);
         setEditingProduct(null);
       } else {
-        await axios.post("http://127.0.0.1:9533/products", formData);
+        await axios.post("http://13.48.58.100/:9533/products", formData);
       }
       setFormData({ name: "", brand: "", price: "", stock: "", category: "", description: "" });
       refreshProducts();
