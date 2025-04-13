@@ -7,7 +7,7 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:9533/products/${id}`);
+      await axios.delete(`http://13.48.58.100:9533/products/${id}`);
       refreshProducts();
     } catch (error) {
       console.error("Error deleting product", error);
