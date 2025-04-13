@@ -143,6 +143,6 @@ def delete_product(product_id):
 
 if __name__ == "__main__":
     try:
-        app.run(debug=True)
+        app.run(debug=True,port=9533)
     except Exception as e:
         print(f"Error starting Flask application: {e}")

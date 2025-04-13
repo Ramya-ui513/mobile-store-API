@@ -15,7 +15,7 @@ const Login = ({ setIsAuthenticated }) => {
     e.preventDefault();
     setErrorMessage("");
     try {
-      const res = await axios.post("http://127.0.0.1:5000/login", credentials);
+      const res = await axios.post("http://127.0.0.1:9533/login", credentials);
       if (res.data.message === "Login successful") {
         setIsAuthenticated(true);
       }
