@@ -14,6 +14,9 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
+  // Use your EC2 backend IP here
+  const apiBase = "http://13.48.58.100:9533";
+
   useEffect(() => {
     if (editingProduct) {
       setFormData(editingProduct);
@@ -29,15 +32,24 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
     e.preventDefault();
     try {
       if (editingProduct) {
-        await axios.put(`http://13.48.58.100:9533/products/${editingProduct.id}`, formData);
+        await axios.put(`${apiBase}/products/${editingProduct.id}`, formData);
         setEditingProduct(null);
       } else {
-        await axios.post("http://13.48.58.100:9533/products", formData);
+        await axios.post(`${apiBase}/products`, formData);
       }
-      setFormData({ name: "", brand: "", price: "", stock: "", category: "", description: "" });
+
+      setFormData({
+        name: "",
+        brand: "",
+        price: "",
+        stock: "",
+        category: "",
+        description: "",
+      });
+
       refreshProducts();
     } catch (error) {
-      console.error("Error submitting form", error);
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -63,7 +75,9 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
       </div>
 
       <form className="form-container" onSubmit={handleSubmit}>
-        <h2 className="form-title">{editingProduct ? "Update Product" : "Add New Product"}</h2>
+        <h2 className="form-title">
+          {editingProduct ? "Update Product" : "Add New Product"}
+        </h2>
         <div className="form-grid">
           <input
             className="input"
