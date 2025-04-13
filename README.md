@@ -38,7 +38,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
    ```sh
    python app.py
    ```
-3. **Backend will run on:** `http://127.0.0.1:5000/`
+3. **Backend will run on:** `http://127.0.0.1:/`
 
 ### 2️⃣ Frontend Setup (React.js)
 1. **Navigate to frontend directory:**
