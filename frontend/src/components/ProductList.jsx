@@ -5,9 +5,12 @@ import "../styles/ProductList.css";
 const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
+  // ✅ Replace localhost with your EC2 IP
+  const apiBase = "http://13.48.58.100:9533";
+
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://13.48.58.100:9533/products/${id}`);
+      await axios.delete(`${apiBase}/products/${id}`);
       refreshProducts();
     } catch (error) {
       console.error("Error deleting product", error);
@@ -37,7 +40,9 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
           {filteredProducts.map((product) => (
             <div key={product.id} className="product-item zoom-in">
               <div className="product-details">
-                <h3 className="product-name">{product.name} <span className="brand">({product.brand})</span></h3>
+                <h3 className="product-name">
+                  {product.name} <span className="brand">({product.brand})</span>
+                </h3>
                 <p><strong>Category:</strong> {product.category}</p>
                 <p><strong>Price:</strong> ${product.price}</p>
                 <p><strong>Stock:</strong> {product.stock} units</p>
