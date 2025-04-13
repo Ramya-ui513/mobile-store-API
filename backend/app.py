@@ -141,6 +141,25 @@ def delete_product(product_id):
     conn.close()
     return jsonify({"message": "Product deleted successfully"})
 
+
+# ---------- Additional Route ----------
+@app.route("/inventory", methods=["GET"])
+def fetch_inventory_items():
+    conn = get_db_connection()
+    if not conn:
+        return jsonify({"error": "Database connection failed"}), 500
+
+    try:
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM products ORDER BY id DESC")
+        products = cursor.fetchall()
+        return jsonify([dict(product) for product in products])
+    except Exception as e:
+        print(f"Error fetching inventory: {e}")
+        return jsonify({"error": "Failed to fetch inventory"}), 500
+    finally:
+        conn.close()
+
 if __name__ == "__main__":
     try:
         app.run(debug=True,port=9533)
