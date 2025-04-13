@@ -4,9 +4,9 @@ import sqlite3
 import hashlib
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
-# Database setup
+# ---------- Database Setup ----------
 def get_db_connection():
     try:
         conn = sqlite3.connect("store.db")
@@ -20,25 +20,30 @@ def init_db():
     conn = get_db_connection()
     if conn:
         cursor = conn.cursor()
+
         # Create products table
-        cursor.execute('''CREATE TABLE IF NOT EXISTS products (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            name TEXT NOT NULL,
-                            brand TEXT NOT NULL,
-                            price REAL NOT NULL,
-                            stock INTEGER NOT NULL,
-                            category TEXT NOT NULL,
-                            description TEXT NOT NULL
-                          )''')
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                brand TEXT NOT NULL,
+                price REAL NOT NULL,
+                stock INTEGER NOT NULL,
+                category TEXT NOT NULL,
+                description TEXT NOT NULL
+            )
+        ''')
+
         # Create admin user manually if not exists
-        cursor.execute('''CREATE TABLE IF NOT EXISTS users (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            username TEXT UNIQUE NOT NULL,
-                            password_hash TEXT NOT NULL
-                          )''')
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT UNIQUE NOT NULL,
+                password_hash TEXT NOT NULL
+            )
+        ''')
         cursor.execute("SELECT * FROM users WHERE username=?", ("admin",))
-        user = cursor.fetchone()
-        if not user:
+        if not cursor.fetchone():
             admin_password = hashlib.sha256("admin123".encode()).hexdigest()
             cursor.execute("INSERT INTO users (username, password_hash) VALUES (?, ?)", ("admin", admin_password))
             conn.commit()
@@ -46,35 +51,38 @@ def init_db():
 
 init_db()
 
-# Hash password function
+# ---------- Utils ----------
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-# Login Admin (Single User Login)
+# ---------- Auth ----------
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
+
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM users WHERE username=?", ("admin",))
     user = cursor.fetchone()
     conn.close()
+
     if user and user['password_hash'] == hash_password(data['password']):
         return jsonify({"message": "Login successful"})
     return jsonify({"error": "Invalid credentials"}), 401
 
-# Search & Filter Products
+# ---------- Product Routes ----------
 @app.route("/products", methods=["GET"])
 def get_products():
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
-    cursor = conn.cursor()
+
     category = request.args.get('category')
     min_price = request.args.get('min_price')
     max_price = request.args.get('max_price')
+
     query = "SELECT * FROM products WHERE 1=1"
     params = []
     if category:
@@ -86,6 +94,8 @@ def get_products():
     if max_price:
         query += " AND price<=?"
         params.append(float(max_price))
+
+    cursor = conn.cursor()
     cursor.execute(query, params)
     products = cursor.fetchall()
     conn.close()
@@ -96,10 +106,12 @@ def get_product(product_id):
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
+
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM products WHERE id=?", (product_id,))
     product = cursor.fetchone()
     conn.close()
+
     if product:
         return jsonify(dict(product))
     return jsonify({"error": "Product not found"}), 404
@@ -110,9 +122,13 @@ def add_product():
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
+
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO products (name, brand, price, stock, category, description) VALUES (?, ?, ?, ?, ?, ?)",
-                   (data.get('name'), data.get('brand'), data.get('price'), data.get('stock'), data.get('category'), data.get('description')))
+    cursor.execute('''
+        INSERT INTO products (name, brand, price, stock, category, description)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (data.get('name'), data.get('brand'), data.get('price'),
+          data.get('stock'), data.get('category'), data.get('description')))
     conn.commit()
     conn.close()
     return jsonify({"message": "Product added successfully"}), 201
@@ -123,9 +139,13 @@ def update_product(product_id):
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
+
     cursor = conn.cursor()
-    cursor.execute("UPDATE products SET name=?, brand=?, price=?, stock=?, category=?, description=? WHERE id=?",
-                   (data.get('name'), data.get('brand'), data.get('price'), data.get('stock'), data.get('category'), data.get('description'), product_id))
+    cursor.execute('''
+        UPDATE products SET name=?, brand=?, price=?, stock=?, category=?, description=?
+        WHERE id=?
+    ''', (data.get('name'), data.get('brand'), data.get('price'),
+          data.get('stock'), data.get('category'), data.get('description'), product_id))
     conn.commit()
     conn.close()
     return jsonify({"message": "Product updated successfully"})
@@ -135,12 +155,12 @@ def delete_product(product_id):
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
+
     cursor = conn.cursor()
     cursor.execute("DELETE FROM products WHERE id=?", (product_id,))
     conn.commit()
     conn.close()
     return jsonify({"message": "Product deleted successfully"})
-
 
 # ---------- Additional Route ----------
 @app.route("/inventory", methods=["GET"])
@@ -160,8 +180,9 @@ def fetch_inventory_items():
     finally:
         conn.close()
 
+# ---------- App Runner ----------
 if __name__ == "__main__":
     try:
-        app.run(debug=True,port=9533)
+        app.run(debug=True, host="0.0.0.0", port=9533)
     except Exception as e:
         print(f"Error starting Flask application: {e}")
