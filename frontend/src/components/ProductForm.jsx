@@ -15,7 +15,7 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   // Use your EC2 backend IP here
-  const apiBase = "http://51.21.211.128 :9533";
+  const apiBase = "http://51.21.211.128:9533";
 
   useEffect(() => {
     if (editingProduct) {

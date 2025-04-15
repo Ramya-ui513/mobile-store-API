@@ -6,7 +6,7 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   // ✅ Replace localhost with your EC2 IP
-  const apiBase = "http://51.21.211.128 :9533";
+  const apiBase = "http://51.21.211.128:9533";
 
   const handleDelete = async (id) => {
     try {
