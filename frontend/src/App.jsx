@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://13.48.58.100:9533/products");
+      const response = await axios.get("http://51.21.211.128 :9533/products");
       setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products", error);
