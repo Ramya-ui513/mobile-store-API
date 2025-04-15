@@ -78,25 +78,9 @@ def get_products():
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
-
-    category = request.args.get('category')
-    min_price = request.args.get('min_price')
-    max_price = request.args.get('max_price')
-
-    query = "SELECT * FROM products WHERE 1=1"
-    params = []
-    if category:
-        query += " AND category=?"
-        params.append(category)
-    if min_price:
-        query += " AND price>=?"
-        params.append(float(min_price))
-    if max_price:
-        query += " AND price<=?"
-        params.append(float(max_price))
-
+    query = "SELECT * FROM products"
     cursor = conn.cursor()
-    cursor.execute(query, params)
+    cursor.execute(query)
     products = cursor.fetchall()
     conn.close()
     return jsonify([dict(p) for p in products])

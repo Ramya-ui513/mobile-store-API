@@ -44,7 +44,7 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
                   {product.name} <span className="brand">({product.brand})</span>
                 </h3>
                 <p><strong>Category:</strong> {product.category}</p>
-                <p><strong>Price:</strong> ${product.price}</p>
+                <p><strong>Price:</strong> €{product.price}</p>
                 <p><strong>Stock:</strong> {product.stock} units</p>
                 <p><strong>Description:</strong> {product.description}</p>
               </div>
