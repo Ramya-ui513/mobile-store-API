@@ -11,6 +11,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 
 ## Features
 ### ✅ Backend (Flask & SQLite)
+- **Login** Authenticate the Admin (`POST /Login`)
 - **View Available Products:** Fetch all products from the database (`GET /products`)
 - **Add New Products:** Insert new product records (`POST /products`)
 - **Edit Existing Products:** Update product details (`PUT /products/<id>`)
@@ -38,7 +39,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
    ```sh
    python app.py
    ```
-3. **Backend will run on:** `http://127.0.0.1:/`
+3. **Backend will run on:** `http://51.21.211.128:9533`
 
 ### 2️⃣ Frontend Setup (React.js)
 1. **Navigate to frontend directory:**
@@ -53,7 +54,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
    ```sh
    npm start
    ```
-4. **Frontend will run on:** `http://localhost:3000/`
+4. **Frontend will run on:** `http://51.21.211.128`
 
 ---
 
@@ -86,6 +87,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 ## API Endpoints
 | Method | Endpoint           | Description |
 |--------|-------------------|-------------|
+| POST   | `/Login`          | Authenticate Admin/User|
 | GET    | `/products`       | View all products |
 | POST   | `/products`       | Add a new product |
 | PUT    | `/products/<id>`  | Update a product |
