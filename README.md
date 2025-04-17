@@ -13,6 +13,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 ### ✅ Backend (Flask & SQLite)
 - **Login** Authenticate the Admin (`POST /Login`)
 - **View Available Products:** Fetch all products from the database (`GET /products`)
+- **View a single Product:** Fetch a single product from the database (`GET /products/<id>`)
 - **Add New Products:** Insert new product records (`POST /products`)
 - **Edit Existing Products:** Update product details (`PUT /products/<id>`)
 - **Delete Products:** Remove a product from inventory (`DELETE /products/<id>`)
@@ -89,6 +90,7 @@ This system allows users to manage inventory, including adding, viewing, updatin
 |--------|-------------------|-------------|
 | POST   | `/Login`          | Authenticate Admin/User|
 | GET    | `/products`       | View all products |
+| GET    | `/products/<id>`  | View a product |
 | POST   | `/products`       | Add a new product |
 | PUT    | `/products/<id>`  | Update a product |
 | DELETE | `/products/<id>`  | Delete a product |
@@ -105,4 +107,4 @@ This system allows users to manage inventory, including adding, viewing, updatin
 ---
 
 ## Contributors
-- Developer:Ramya
+- Developer:Ramya Sai Bojja
