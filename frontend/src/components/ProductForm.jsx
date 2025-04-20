@@ -65,7 +65,7 @@ const ProductForm = ({ refreshProducts, editingProduct, setEditingProduct }) => 
     <div className="product-form-wrapper">
       <div className="profile-menu">
         <div className="profile-label" onClick={toggleDropdown}>
-          👤 Admin ▾
+          Admin ▾
         </div>
         {dropdownVisible && (
           <div className="dropdown-menu">

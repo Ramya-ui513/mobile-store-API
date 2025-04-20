@@ -5,7 +5,6 @@ import "../styles/ProductList.css";
 const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  // ✅ Replace localhost with your EC2 IP
   const apiBase = "http://51.21.211.128:9533";
 
   const handleDelete = async (id) => {
@@ -25,12 +24,12 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
 
   return (
     <div className="list-container">
-      <h2 className="list-title">📦 Product Inventory</h2>
+      <h2 className="list-title">Product Inventory</h2>
 
       <input
         type="text"
         className="search-bar"
-        placeholder="🔍 Search by name, brand, or category..."
+        placeholder="Search by name, brand, or category..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
@@ -49,8 +48,8 @@ const ProductList = ({ products, refreshProducts, setEditingProduct }) => {
                 <p><strong>Description:</strong> {product.description}</p>
               </div>
               <div className="product-actions">
-                <button className="update-button" onClick={() => setEditingProduct(product)}>✏️ Edit</button>
-                <button className="delete-button" onClick={() => handleDelete(product.id)}>🗑️ Delete</button>
+                <button className="update-button" onClick={() => setEditingProduct(product)}>Edit</button>
+                <button className="delete-button" onClick={() => handleDelete(product.id)}>Delete</button>
               </div>
             </div>
           ))}
