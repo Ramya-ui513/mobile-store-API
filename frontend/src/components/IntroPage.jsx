@@ -3,12 +3,10 @@ import React from "react";
 const IntroPage = ({ onGetStarted }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-      {/* Header */}
       <header className="py-6 shadow-md bg-blue-600 text-center">
         <h1 className="text-4xl font-bold">Mobile Store Inventory System</h1>
       </header>
 
-      {/* Main Content */}
       <main className="flex-grow flex justify-center items-center">
         <div className="bg-white text-gray-800 shadow-2xl rounded-2xl p-8 max-w-lg text-center animate-fadeIn">
           <h2 className="text-3xl font-bold mb-4">
@@ -30,8 +28,6 @@ const IntroPage = ({ onGetStarted }) => {
           </p>
         </div>
       </main>
-
-      {/* Footer */}
       <footer className="py-4 text-center text-sm bg-blue-600">
         <p>&copy; {new Date().getFullYear()} Mobile Store Inventory. All rights reserved.</p>
       </footer>
