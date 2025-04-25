@@ -100,9 +100,28 @@ This system allows users to manage inventory, including adding, viewing, updatin
 ## Notes & Future Changes
 - **This README will be updated if any changes are made** to the backend API or frontend UI.
 - Future improvements may include:
-  - User authentication for secure access is done on 15/03/2024
-  - Product search and filtering options is implemented on 22/03/2024 
-  - Enhanced UI/UX improvements this takes time for a while for me 
+  - User authentication for secure access is done on 15/03/2025
+  - Product search and filtering options is implemented on 22/03/2025
+  
+## References
+
+- **Backend**
+- https://github.com/Premkumar264/PG_Hostel/blob/main/app.py
+- https://www.youtube.com/watch?v=zsYIw6RXjfM&t=169s 
+- https://www.youtube.com/watch?v=0SyCQh323cg
+- https://stackoverflow.com/questions/25594893/how-to-enable-cors-in-flask
+- https://stackoverflow.com/questions/41940663/how-can-i-change-the-host-and-port-that-the-flask-command-uses
+- https://www.w3schools.com/python/default.asp
+- https://flask.palletsprojects.com/en/stable/
+
+- **Frontend**
+- https://github.com/souvik-dey-28/Login/blob/main/Login.jsx
+- https://www.npmjs.com/package/axios/v/1.7.9#example
+- https://stackoverflow.com/questions/40714583/how-to-specify-a-port-to-run-a-create-react-app-based-project
+- https://www.w3schools.com/react/react_usestate.asp
+- https://www.w3schools.com/react/react_css_styling.asp
+- https://react.dev/learn
+
 
 ---
 
